@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generate strong, secure passwords instantly. Customize length, character types, and copy with one click. Free online password generator." />
+  <meta name="keywords" content="password generator, strong password, secure password, random password" />
+  <meta name="author" content="PassGen" />
+  <meta property="og:title" content="PassGen — Secure Password Generator" />
+  <meta property="og:description" content="Generate strong, secure passwords instantly with PassGen." />
+  <meta property="og:type" content="website" />
+  <title>PassGen — Secure Password Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background particles -->
+  <div class="bg-particles" aria-hidden="true">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="6" y="13" width="20" height="14" rx="3" fill="url(#grad1)"/>
+          <path d="M10 13V10a6 6 0 0 1 12 0v3" stroke="url(#grad2)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="20" r="2.5" fill="white"/>
+          <defs>
+            <linearGradient id="grad1" x1="6" y1="13" x2="26" y2="27" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="grad2" x1="10" y1="7" x2="22" y2="13" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">PassGen</span>
+      </div>
+      <nav class="header-nav" aria-label="Site navigation">
+        <a href="#generator" class="nav-link">Generator</a>
+        <a href="#history" class="nav-link">History</a>
+        <a href="#tips" class="nav-link">Tips</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <!-- Moon icon (shown in dark mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun icon (shown in light mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main" id="generator">
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Secure &amp; Free
+      </div>
+      <h1 id="hero-title" class="hero-title">
+        Generate <span class="gradient-text">Unbreakable</span><br/>Passwords Instantly
+      </h1>
+      <p class="hero-subtitle">
+        Create cryptographically strong passwords with custom length,<br/>
+        character sets, and copy them to your clipboard in one click.
+      </p>
+    </section>
+
+    <!-- Generator Card -->
+    <section class="generator-card glass" aria-label="Password generator">
+
+      <!-- Password Display -->
+      <div class="password-display-wrapper">
+        <div class="password-display" id="password-display" aria-live="polite" aria-label="Generated password">
+          <span class="password-text" id="password-text">Click generate to create a password</span>
+          <div class="display-actions">
+            <button class="icon-btn copy-btn" id="copy-btn" title="Copy to clipboard" aria-label="Copy password to clipboard" disabled>
+              <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="check-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Strength Meter -->
+        <div class="strength-wrapper" id="strength-wrapper" aria-label="Password strength indicator">
+          <div class="strength-bars" id="strength-bars" aria-hidden="true">
+            <div class="strength-bar" id="bar-1"></div>
+            <div class="strength-bar" id="bar-2"></div>
+            <div class="strength-bar" id="bar-3"></div>
+            <div class="strength-bar" id="bar-4"></div>
+          </div>
+          <span class="strength-label" id="strength-label" aria-live="polite">—</span>
+        </div>
+      </div>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <!-- Settings -->
+      <div class="settings" role="group" aria-label="Password settings">
+
+        <!-- Length Slider -->
+        <div class="setting-row length-row">
+          <div class="setting-label-group">
+            <label class="setting-label" for="length-slider">Password Length</label>
+            <div class="length-display">
+              <input type="number" id="length-number" class="length-number-input" min="4" max="128" value="16" aria-label="Password length value" />
+            </div>
+          </div>
+          <div class="slider-wrapper">
+            <input
+              type="range"
+              id="length-slider"
+              class="slider"
+              min="4"
+              max="128"
+              value="16"
+              step="1"
+              aria-label="Password length slider"
+            />
+            <div class="slider-track-fill" id="slider-fill"></div>
+          </div>
+          <div class="slider-ticks" aria-hidden="true">
+            <span>4</span>
+            <span>32</span>
+            <span>64</span>
+            <span>96</span>
+            <span>128</span>
+          </div>
+        </div>
+
+        <div class="divider-light" aria-hidden="true"></div>
+
+        <!-- Character Options -->
+        <div class="options-grid" role="group" aria-label="Character type options">
+          <label class="option-card" for="opt-uppercase" id="label-uppercase">
+            <div class="option-info">
+              <span class="option-title">Uppercase</span>
+              <span class="option-example">A–Z</span>
+            </div>
+            <div class="toggle-wrapper">
+              <input type="checkbox" id="opt-uppercase" class="toggle-input" checked aria-labelledby="label-uppercase" />
+              <div class="toggle" aria-hidden="true"><div class="toggle-thumb"></div></div>
+            </div>
+          </label>
+
+          <label class="option-card" for="opt-lowercase" id="label-lowercase">
+            <div class="option-info">
+              <span class="option-title">Lowercase</span>
+              <span class="option-example">a–z</span>
+            </div>
+            <div class="toggle-wrapper">
+              <input type="checkbox" id="opt-lowercase" class="toggle-input" checked aria-labelledby="label-lowercase" />
+              <div class="toggle" aria-hidden="true"><div class="toggle-thumb"></div></div>
+            </div>
+          </label>
+
+          <label class="option-card" for="opt-numbers" id="label-numbers">
+            <div class="option-info">
+              <span class="option-title">Numbers</span>
+              <span class="option-example">0–9</span>
+            </div>
+            <div class="toggle-wrapper">
+              <input type="checkbox" id="opt-numbers" class="toggle-input" checked aria-labelledby="label-numbers" />
+              <div class="toggle" aria-hidden="true"><div class="toggle-thumb"></div></div>
+            </div>
+          </label>
+
+          <label class="option-card" for="opt-symbols" id="label-symbols">
+            <div class="option-info">
+              <span class="option-title">Symbols</span>
+              <span class="option-example">!@#$%</span>
+            </div>
+            <div class="toggle-wrapper">
+              <input type="checkbox" id="opt-symbols" class="toggle-input" checked aria-labelledby="label-symbols" />
+              <div class="toggle" aria-hidden="true"><div class="toggle-thumb"></div></div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Exclude Ambiguous -->
+        <label class="option-row-full" for="opt-exclude-ambiguous" id="label-exclude-ambiguous">
+          <div class="option-info">
+            <span class="option-title">Exclude Ambiguous Characters</span>
+            <span class="option-desc">Avoid characters like O, 0, l, 1, |, I</span>
+          </div>
+          <div class="toggle-wrapper">
+            <input type="checkbox" id="opt-exclude-ambiguous" class="toggle-input" aria-labelledby="label-exclude-ambiguous" />
+            <div class="toggle" aria-hidden="true"><div class="toggle-thumb"></div></div>
+          </div>
+        </label>
+
+        <div class="divider-light" aria-hidden="true"></div>
+
+        <!-- Stats Row -->
+        <div class="stats-row" aria-label="Password statistics">
+          <div class="stat-card">
+            <span class="stat-value" id="stat-entropy">—</span>
+            <span class="stat-label">Entropy (bits)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="stat-charset">—</span>
+            <span class="stat-label">Charset Size</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="stat-crack">—</span>
+            <span class="stat-label">Time to Crack</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generate Button -->
+      <button class="generate-btn" id="generate-btn" aria-label="Generate new password">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        Generate Password
+      </button>
+
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section" id="history" aria-labelledby="history-title">
+      <div class="section-header">
+        <h2 id="history-title" class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Recent Passwords
+        </h2>
+        <div class="history-actions">
+          <button class="export-btn" id="export-history-btn" aria-label="Export password history as text file" title="Export as .txt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export
+          </button>
+          <button class="clear-btn" id="clear-history-btn" aria-label="Clear all history">Clear All</button>
+        </div>
+      </div>
+      <div class="history-list" id="history-list" aria-label="Password history" role="list">
+        <div class="history-empty" id="history-empty" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <p>No passwords generated yet.<br/>Your session history will appear here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips-section" id="tips" aria-labelledby="tips-title">
+      <h2 id="tips-title" class="section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        Password Security Tips
+      </h2>
+      <div class="tips-grid">
+        <article class="tip-card glass-light">
+          <div class="tip-icon">🔒</div>
+          <h3 class="tip-title">Use a Password Manager</h3>
+          <p class="tip-text">Store your complex passwords securely using a reputable password manager like Bitwarden, 1Password, or Dashlane.</p>
+        </article>
+        <article class="tip-card glass-light">
+          <div class="tip-icon">🔄</div>
+          <h3 class="tip-title">Never Reuse Passwords</h3>
+          <p class="tip-text">Each account should have a unique password. If one is breached, others remain safe. Generate a unique one for every service.</p>
+        </article>
+        <article class="tip-card glass-light">
+          <div class="tip-icon">📏</div>
+          <h3 class="tip-title">Longer is Stronger</h3>
+          <p class="tip-text">A 20-character password is exponentially harder to crack than a 10-character one. Aim for at least 16 characters for sensitive accounts.</p>
+        </article>
+        <article class="tip-card glass-light">
+          <div class="tip-icon">🛡️</div>
+          <h3 class="tip-title">Enable 2FA Everywhere</h3>
+          <p class="tip-text">Two-factor authentication adds a critical second layer of protection even if your password is somehow compromised.</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="6" y="13" width="20" height="14" rx="3" fill="url(#grad3)"/>
+          <path d="M10 13V10a6 6 0 0 1 12 0v3" stroke="url(#grad4)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="20" r="2.5" fill="white"/>
+          <defs>
+            <linearGradient id="grad3" x1="6" y1="13" x2="26" y2="27" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="grad4" x1="10" y1="7" x2="22" y2="13" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">PassGen</span>
+      </div>
+      <p class="footer-text">Passwords are generated entirely in your browser. We never store or transmit any data.</p>
+
+      <div class="footer-author">
+        <span class="footer-author-name">Swarnadeep Sarkar</span>
+        <a class="footer-author-email" href="mailto:swarnadeepsarkar66@gmail.com">swarnadeepsarkar66@gmail.com</a>
+      </div>
+
+      <a
+        href="https://digitalheroesco.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dh-btn"
+        id="dh-btn"
+        aria-label="Built for Digital Heroes — visit digitalheroesco.com"
+      ><span>Built for Digital Heroes</span></a>
+
+      <p class="footer-copy">© 2026 PassGen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
